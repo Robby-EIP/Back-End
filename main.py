@@ -3,10 +3,10 @@ from typing import Optional
 from fastapi import FastAPI, Body, Request, File, UploadFile, Form
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
-from starlette.responses import aiofiles
+#from starlette.responses import aiofiles
 import os
 import time
-# import aiofiles
+import aiofiles
 
 testvar:int = 0
 
@@ -14,7 +14,7 @@ app = FastAPI()
 
 origins = [
     "http://127.0.0.1",
-    "https://127.0.0.1:8000",
+    "https://127.0.0.1:80",
 ]
 
 app.add_middleware(
@@ -34,17 +34,13 @@ class TestItem(BaseModel):
     code: str
 
 def push_ino():
-    os.system('mv *.ino assets.ino')
-    os.system('./../ArduinoExecs/arduino-cli board attach arduino:avr:uno')
-    os.system('./../ArduinoExecs/arduino-cli compile . -e')
-    os.system('./../ArduinoExecs/avrdude -C./../ArduinoExecs/avrdude.conf -v -c arduino -p atmega328p -P net:172.20.10.5:80 -Uflash:w:./build/arduino.avr.uno/assets.ino.hex:i')
-    os.system('rm -rf build')
-    os.system('rm *.ino')
-    os.system('rm sketch.json')
+    os.system('mv *.ino src/file.ino')
+    os.system('pio run -t upload')
+    os.system('rm src/*.ino')
 
 def push_hex():
     os.system('mv *.hex assets.hex')
-    os.system('./../ArduinoExecs/avrdude -C./../ArduinoExecs/avrdude.conf -v -c arduino -p atmega328p -P net:172.20.10.5:80 -Uflash:w:./assets.hex:i')
+    os.system('pio run -t upload')
     os.system('rm *.hex')
 
 @app.get("/")
@@ -53,7 +49,7 @@ def read_root():
 
 @app.post('/push/rawcode')
 def get_rawcode(test: TestItem):
-    f = open('./assets/code' + str(testvar) + '.txt', "w")
+    f = open('./assets/code.ino', "w")
     f.write(test.code)
     return {'success': 'true'}
 
