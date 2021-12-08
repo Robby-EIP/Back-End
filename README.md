@@ -12,6 +12,7 @@
 - ```sudo apt-get install pip3```
 - ```pip install fastapi```
 - ```pip install uvicorn```
+- ```pip install platformio```
 
 ## <a name="HowToLaunch"></a> How to launch
 - ```uvicorn main:app --reload```
