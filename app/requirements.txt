@@ -7,3 +7,4 @@ platformio<=5.2.3
 fastapi-sqlalchemy==0.2.0
 python-dotenv==0.12.0
 psycopg2==2.8.5
+alembic
