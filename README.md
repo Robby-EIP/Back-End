@@ -14,6 +14,9 @@
 - ```pip install uvicorn```
 - ```pip install platformio```
 
+or
+- ```sudo apt-get install docker-ce docker-ce-cli containerd.io```
+
 ## <a name="HowToLaunch"></a> How to launch
 - ```uvicorn main:app --reload```
 
