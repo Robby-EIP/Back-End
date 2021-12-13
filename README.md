@@ -27,6 +27,16 @@ or
 - ```docker build --tag uvicorn .```
   ```docker run -p 8080:8080 uvicorn```
 
+## <a name="Unit Tests"></a> Unit Tests
+
+
+```Dependencies```
+- ```pip install pytest```
+- ```pip install pytest-cov```
+
+```Run```
+- ```pytest --cov-report=xml --cov=main test_main.py```
+
 ## <a name="Authors"></a> Authors
 - [Rafik Merzouk](https://github.com/Belkadafi)
 - [Gabriel Knies](https://github.com/gabirel1)
