@@ -5,7 +5,7 @@
 #define IN3 9
 #define IN4 11
 
-void forward(){ 
+void forward(){
   digitalWrite(ENA,HIGH);
   digitalWrite(ENB,HIGH);
   digitalWrite(IN1,HIGH);
@@ -31,7 +31,7 @@ void left(){
   digitalWrite(IN1,LOW);
   digitalWrite(IN2,HIGH);
   digitalWrite(IN3,LOW);
-  digitalWrite(IN4,HIGH); 
+  digitalWrite(IN4,HIGH);
   Serial.println("Left");
 }
 
