@@ -20,6 +20,10 @@
 or
 - ```uvicorn main:app```
 
+or
+- ```docker build --tag uvicorn .```
+  ```docker run -p 8080:8080 uvicorn```
+
 ## <a name="Authors"></a> Authors
 - [Rafik Merzouk](https://github.com/Belkadafi)
 - [Gabriel Knies](https://github.com/gabirel1)
