@@ -97,6 +97,7 @@ def get_rawcode(robot: str, info: RawCode):
 
 @app.post('/push/file', status_code=status.HTTP_200_OK)
 async def push_file(robot: str, file: UploadFile = File(...)):
+    get_robot_index(robot)
     async with aiofiles.open(f"./{file.filename}", 'wb+') as out_file:
         content = await file.read()
         await out_file.write(content)
@@ -139,7 +140,13 @@ def get_blocs(blocs: Blocs, robot: str):
 def send_blocs(robot: str):
     try:
         robots_index.index(robot)
-        return {"success": "true", "robot": "elegoo", "blocs": ','.join(bloc_list[robots_index.index(robot)])}
+        return {"success": "true", "robot": robot, "blocs": ','.join(bloc_list[robots_index.index(robot)])}
     except:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, 
         detail=f'Robot {robot} not found in database')
+
+
+
+@app.get('/robots', status_code=status.HTTP_200_OK)
+def send_robots():
+    return {"success": "true", "robots": robots_index}
