@@ -62,8 +62,8 @@ def get_robot_index(robot):
 #Fill ips with dhcp protocol
 robots_index = ['elegoo']
 robots_ip = ["172.20.10.5:80"]
-bloc_list = [['forward', 'back', 'left', 'right', 'wait']]
-bloc_translate = [['forward', 'back', 'left', 'right', 'delay']]
+bloc_list = [['forward', 'back', 'left', 'right', 'wait', 'stop']]
+bloc_translate = [['forward', 'back', 'left', 'right', 'delay', 'stop']]
 bloc_args = [[0, 0, 0, 0, 1]]
 
 
@@ -125,8 +125,13 @@ def get_blocs(blocs: Blocs, robot: str):
     robot_index = get_robot_index(robot)
     f2 = open(f'../example/{robot}.ino', "r")
     example = f2.read()
-    example += cmds_to_file(blocs.setup.split(','), robot_index)
-    example += "}void loop(){" + cmds_to_file(blocs.loop.split(','), robot_index) + "}"
+    if (blocs.setup != ''): 
+        example += cmds_to_file(blocs.setup.split(','), robot_index)
+    # example += "}void loop(){" + cmds_to_file(blocs.loop.split(','), robot_index) + "}"
+    example += "}void loop(){"
+    if (blocs.loop != ''):
+        example += cmds_to_file(blocs.loop.split(','), robot_index)
+    example += "}"
     f3 = open('./src/assets.ino', "w")
     f3.write(example)
     f3.close()

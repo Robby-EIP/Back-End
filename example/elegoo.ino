@@ -5,25 +5,31 @@
 #define IN3 9
 #define IN4 11
 
-void forward(){
+void back(){
   digitalWrite(ENA,HIGH);
   digitalWrite(ENB,HIGH);
   digitalWrite(IN1,HIGH);
   digitalWrite(IN2,LOW);
   digitalWrite(IN3,LOW);
   digitalWrite(IN4,HIGH);
-  Serial.println("Forward");
+  Serial.println("Back");
 }
 
-void back(){
+void forward(){
   digitalWrite(ENA,HIGH);
   digitalWrite(ENB,HIGH);
   digitalWrite(IN1,LOW);
   digitalWrite(IN2,HIGH);
   digitalWrite(IN3,HIGH);
   digitalWrite(IN4,LOW);
-  Serial.println("Back");
+  Serial.println("Forward");
 }
+
+void stop() {
+  digitalWrite(ENA, LOW);
+  digitalWrite(ENB, LOW);
+  Serial.println("Stop!");
+} 
 
 void left(){
   digitalWrite(ENA,HIGH);
